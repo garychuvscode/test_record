@@ -10,6 +10,9 @@ from selenium.webdriver.support.ui import Select
 from webdriver_manager.chrome import ChromeDriverManager
 import time
 
+from selenium.webdriver.common.by import By
+import lxml
+
 
 class Stock:
     def __init__(self, *stock_numbers):
@@ -123,13 +126,14 @@ class Stock:
         browser.get(
             "https://www.twse.com.tw/zh/page/trading/exchange/STOCK_DAY_AVG.html")
 
-        select_year = Select(browser.find_element_by_name("yy"))
+        select_year = Select(browser.find_element(By.NAME, "yy"))
         select_year.select_by_value(year)  # 選擇傳入的年份
 
-        select_month = Select(browser.find_element_by_name("mm"))
+        select_month = Select(browser.find_element(By.NAME, "mm"))
         select_month.select_by_value(month)  # 選擇傳入的月份
 
-        stockno = browser.find_element_by_name("stockNo")  # 定位股票代碼輸入框
+        stockno = browser.find_element(
+            By.NAME, "stockNo")  # 定位股票代碼輸入框
 
         result = []
         for stock_number in self.stock_numbers:
@@ -153,8 +157,11 @@ class Stock:
         print(result)
 
 
-stock = Stock('2451', '2454', '2369')  # 建立Stock物件
-stock.daily("2019", "7")  # 動態爬取指定的年月份中，股票代碼的每日收盤價
+# stock = Stock('2451', '2454', '2369')  # 建立Stock物件
+# stock.daily("2019", "7")  # 動態爬取指定的年月份中，股票代碼的每日收盤價
+
+stock = Stock('3034')  # 建立Stock物件
+stock.daily("2022", "12")  # 動態爬取指定的年月份中，股票代碼的每日收盤價
 
 # stock.gsheet(stock.scrape())  # 將爬取的股票當日行情資料寫入Google Sheet工作表
 # stock.export(stock.scrape())  # 將爬取的股票當日行情資料匯出成Excel檔案
