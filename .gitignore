@@ -1,3 +1,9 @@
+*.ini
+*.tmp.driveupload
+*.vscode
+*.gitignore
+*.pyc
+
 ### Python ###
 # Byte-compiled / optimized / DLL files
 __pycache__/
