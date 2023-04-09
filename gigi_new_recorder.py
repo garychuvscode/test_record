@@ -32,6 +32,7 @@ class data_capture():
         # print(df_raw)
         df_raw1 = df_raw.iloc[:, :5]
         df_raw2 = df_raw.iloc[:, 6:]
+        # refer to pandas function
         # print(df_raw1)
         # print(df_raw2)
         df_raw2.rename(columns={'序號.1': '序號', '券商.1': '券商', '價格.1': '價格',
@@ -44,6 +45,7 @@ class data_capture():
         df_raw3.sort_values(by=["序號"], ascending=True,
                             inplace=True, ignore_index=True)
         df_raw3['序號'] = df_raw3['序號'].astype('uint32')
+        # uint32 => used 32bit integer, 因為交易比數會太多
         # print(df_raw3)
         df_raw3.insert(0, "日期", datestr1)
         df_raw3.insert(1, "證券代號", stock_id)
